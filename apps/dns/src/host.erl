@@ -1,10 +1,12 @@
 -module(host).
 -behaviour(gen_server).
 
+-import(utils, [name_to_atoms/1]).
+
 %% API
 -export([start/1, stop/1, start_link/1, ping/1]).
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).
--record(state, {}).
+-record(state, {name}).
 
 ping(Host) ->
     gen_server:call(Host, ping).
@@ -26,14 +28,14 @@ register_dns(Server, [H|T]) ->
     register_dns(Pid, T).
 
 init([Name]) ->
-    register_dns(root, Name),
-    {ok, [#state{}]}.
+    register_dns(root, name_to_atoms(Name)),
+    {ok, #state{name=Name}}.
 
 handle_call(stop, _From, State) ->
     {stop, normal, stopped, State};
 
 handle_call(ping, _From, State) ->
-    {reply, pong, State}.
+    {reply, {pong, State#state.name}, State}.
 
 handle_cast(_Msg, State) ->
     {noreply, State}.

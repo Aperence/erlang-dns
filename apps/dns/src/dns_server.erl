@@ -8,6 +8,8 @@
 
 -behaviour(gen_server).
 
+-import(utils, [name_to_atoms/1]).
+
 %% API
 -export([start/1, stop/1, start_link/1, register/3, register_ns/3, request/2]).
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).
@@ -30,7 +32,7 @@ stop(Name) ->
     gen_server:call(Name, stop).
 
 start_link({name, Name}) ->
-    gen_server:start_link(?MODULE, [Name], []);
+    gen_server:start_link(?MODULE, [name_to_atoms(Name)], []);
 
 start_link(Name) ->
     gen_server:start_link({local, Name}, ?MODULE, [], []).

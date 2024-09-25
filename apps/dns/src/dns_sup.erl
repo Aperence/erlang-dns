@@ -37,31 +37,27 @@ init([]) ->
     },
     #{
         id => 1,
-        start => {dns_server, start_link, [{name, [com]}]}
+        start => {dns_server, start_link, [{name, "com"}]}
     },
     #{
         id => 2,
-        start => {dns_server, start_link, [{name, [com, google]}]}
+        start => {dns_server, start_link, [{name, "be"}]}
     },
     #{
         id => 3,
-        start => {dns_server, start_link, [{name, [com, google, www]}]}
+        start => {dns_server, start_link, [{name, "google.com"}]}
     },
     #{
         id => 4,
-        start => {dns_server, start_link, [{name, [com, ucl]}]}
-    },
-    #{
-        id => 5,
-        start => {dns_server, start_link, [{name, [com, ucl, www]}]}
+        start => {dns_server, start_link, [{name, "uclouvain.be"}]}
     },
     #{
         id => 10,
-        start => {host, start_link, [{name, [com, google, www]}]}
+        start => {host, start_link, [{name, "www.google.com"}]}
     },
     #{
         id => 11,
-        start => {host, start_link, [{name, [com, ucl, www]}]}
+        start => {host, start_link, [{name, "www.uclouvain.be"}]}
     },
     #{
         id => 20,
